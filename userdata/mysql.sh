@@ -1,14 +1,17 @@
 #!/bin/bash
 DATABASE_PASS='admin123'
 sudo yum update -y
+
 #sudo yum install epel-release -y
 sudo yum install git zip unzip -y
 sudo dnf install mariadb105-server -y
+
 # starting & enabling mariadb-server
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 cd /tmp/
 git clone -b main https://github.com/hkhcoder/vprofile-project.git
+
 #restore the dump file for the application
 sudo mysqladmin -u root password "$DATABASE_PASS"
 sudo mysql -u root -p"$DATABASE_PASS" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DATABASE_PASS'"
